@@ -11,6 +11,7 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
+    "test:auth": "node --experimental-strip-types --test src/server/auth/password.test.mjs src/server/auth/schemas.test.mjs",
     "typecheck": "tsc --noEmit",
     "prisma:generate": "prisma generate",
     "prisma:validate": "prisma validate",
@@ -23,7 +24,8 @@
     "next": "16.4.3",
     "pg": "^8.16.3",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -32,8 +34,8 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.3",
-    "prisma": "7.10.1",
     "postcss": "^8",
+    "prisma": "7.10.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
