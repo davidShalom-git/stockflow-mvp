@@ -38,29 +38,23 @@ export async function registerUser(input: SignupInput) {
   const session = makeSession();
 
   try {
-    const user = await prisma.$transaction(async (transaction) => {
-      const createdUser = await transaction.user.create({
-        data: {
-          email: input.email,
-          passwordHash,
-          organization: { create: { name: input.organizationName } },
+    const user = await prisma.user.create({
+      data: {
+        email: input.email,
+        passwordHash,
+        organization: { create: { name: input.organizationName } },
+        sessions: {
+          create: {
+            tokenHash: session.tokenHash,
+            expiresAt: session.expiresAt,
+          },
         },
-        select: {
-          id: true,
-          email: true,
-          organization: { select: { id: true, name: true } },
-        },
-      });
-
-      await transaction.session.create({
-        data: {
-          tokenHash: session.tokenHash,
-          userId: createdUser.id,
-          expiresAt: session.expiresAt,
-        },
-      });
-
-      return createdUser;
+      },
+      select: {
+        id: true,
+        email: true,
+        organization: { select: { id: true, name: true } },
+      },
     });
 
     return { user, token: session.token, expiresAt: session.expiresAt };

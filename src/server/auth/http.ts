@@ -50,7 +50,13 @@ export function authErrorResponse(error: unknown, operation: string): Response {
     return authJson({ error: error.message, code: "INVALID_CREDENTIALS" }, 401);
   }
 
-  // Log the error class only; never log request bodies, passwords, or connection strings.
-  console.error(`[auth.${operation}]`, error instanceof Error ? error.name : "UnknownError");
+  // Log only the error class and Prisma code; never log bodies, passwords, or connection strings.
+  const errorCode =
+    typeof error === "object" && error !== null && "code" in error ? String(error.code) : "unknown";
+  console.error(
+    `[auth.${operation}]`,
+    error instanceof Error ? error.name : "UnknownError",
+    `code=${errorCode}`,
+  );
   return authJson({ error: "Authentication request failed.", code: "INTERNAL_ERROR" }, 500);
 }
