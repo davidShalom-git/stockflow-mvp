@@ -16,7 +16,9 @@
     "prisma:generate": "prisma generate",
     "prisma:validate": "prisma validate",
     "prisma:migrate": "prisma migrate dev",
-    "test:products": "node --experimental-strip-types --test src/server/products/schemas.test.mjs"
+    "test:products": "node --experimental-strip-types --test src/server/products/schemas.test.mjs",
+    "test:dashboard": "node --experimental-strip-types --test src/server/dashboard/metrics.test.mjs",
+    "test:settings": "node --experimental-strip-types --test src/server/settings/schemas.test.mjs"
   },
   "dependencies": {
     "@prisma/adapter-pg": "7.10.1",

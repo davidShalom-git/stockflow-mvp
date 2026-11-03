@@ -12,9 +12,15 @@ export default async function PrivateLayout({ children }: { children: ReactNode 
     <div className="min-h-screen bg-zinc-50">
       <header className="border-b border-zinc-200 bg-white">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-4">
-          <Link className="text-sm font-semibold tracking-wide text-emerald-700" href="/dashboard">
-            STOCKFLOW
-          </Link>
+          <div className="flex items-center gap-6">
+            <Link className="text-sm font-semibold tracking-wide text-emerald-700" href="/dashboard">
+              STOCKFLOW
+            </Link>
+            <nav aria-label="Main navigation" className="flex items-center gap-4 text-sm">
+              <Link className="text-zinc-600 transition hover:text-zinc-950" href="/dashboard">Dashboard</Link>
+              <Link className="text-zinc-600 transition hover:text-zinc-950" href="/settings">Settings</Link>
+            </nav>
+          </div>
           <div className="flex items-center gap-4">
             <div className="hidden text-right sm:block">
               <p className="text-sm font-medium text-zinc-900">{user.organization.name}</p>
